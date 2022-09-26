@@ -18,10 +18,10 @@ variable "resource_name_prefix" {
   description = "Resource name prefix used for tagging and naming AWS resources"
 }
 
-variable "secrets_manager_arn" {
-  type        = string
-  description = "Secrets manager ARN where TLS cert info is stored"
-}
+# variable "secrets_manager_arn" {
+#   type        = string
+#   description = "Secrets manager ARN where TLS cert info is stored"
+# }
 
 variable "user_supplied_iam_role_name" {
   type        = string

@@ -90,26 +90,26 @@ data "aws_iam_policy_document" "session_manager" {
   }
 }
 
-resource "aws_iam_role_policy" "secrets_manager" {
-  count  = var.user_supplied_iam_role_name != null ? 0 : 1
-  name   = "${var.resource_name_prefix}-vault-secrets-manager"
-  role   = aws_iam_role.instance_role[0].id
-  policy = data.aws_iam_policy_document.secrets_manager.json
-}
+# resource "aws_iam_role_policy" "secrets_manager" {
+#   count  = var.user_supplied_iam_role_name != null ? 0 : 1
+#   name   = "${var.resource_name_prefix}-vault-secrets-manager"
+#   role   = aws_iam_role.instance_role[0].id
+#   policy = data.aws_iam_policy_document.secrets_manager.json
+# }
 
-data "aws_iam_policy_document" "secrets_manager" {
-  statement {
-    effect = "Allow"
+# data "aws_iam_policy_document" "secrets_manager" {
+#   statement {
+#     effect = "Allow"
 
-    actions = [
-      "secretsmanager:GetSecretValue",
-    ]
+#     actions = [
+#       "secretsmanager:GetSecretValue",
+#     ]
 
-    resources = [
-      var.secrets_manager_arn,
-    ]
-  }
-}
+#     resources = [
+#       var.secrets_manager_arn,
+#     ]
+#   }
+# }
 
 resource "aws_iam_role_policy" "s3_bucket_vault_license" {
   count  = var.user_supplied_iam_role_name != null ? 0 : 1
