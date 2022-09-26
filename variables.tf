@@ -39,10 +39,10 @@ variable "kms_key_deletion_window" {
 #   description = "One of the shared DNS SAN used to create the certs use for mTLS"
 # }
 
-variable "lb_certificate_arn" {
-  type        = string
-  description = "ARN of TLS certificate imported into ACM for use with LB listener"
-}
+# variable "lb_certificate_arn" {
+#   type        = string
+#   description = "ARN of TLS certificate imported into ACM for use with LB listener"
+# }
 
 variable "lb_health_check_path" {
   type        = string
@@ -82,11 +82,11 @@ variable "resource_name_prefix" {
 #   description = "Secrets manager ARN where TLS cert info is stored"
 # }
 
-variable "ssl_policy" {
-  type        = string
-  default     = "ELBSecurityPolicy-TLS-1-2-2017-01"
-  description = "SSL policy to use on LB listener"
-}
+# variable "ssl_policy" {
+#   type        = string
+#   default     = "ELBSecurityPolicy-TLS-1-2-2017-01"
+#   description = "SSL policy to use on LB listener"
+# }
 
 variable "user_supplied_ami_id" {
   type        = string

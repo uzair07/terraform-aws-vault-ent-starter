@@ -25,7 +25,7 @@ module "loadbalancer" {
 
   allowed_inbound_cidrs = var.allowed_inbound_cidrs_lb
   common_tags           = var.common_tags
-  lb_certificate_arn    = var.lb_certificate_arn
+  # lb_certificate_arn    = var.lb_certificate_arn
   lb_health_check_path  = var.lb_health_check_path
   lb_subnets            = module.networking.vault_subnet_ids
   lb_type               = var.lb_type

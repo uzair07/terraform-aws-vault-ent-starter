@@ -77,8 +77,8 @@ resource "aws_lb_listener" "vault" {
   load_balancer_arn = aws_lb.vault_lb.id
   port              = 8200
   protocol          = local.lb_protocol
-  ssl_policy        = local.lb_protocol == "HTTPS" ? var.ssl_policy : null
-  certificate_arn   = local.lb_protocol == "HTTPS" ? var.lb_certificate_arn : null
+  ssl_policy        = null
+  certificate_arn   = null
 
   default_action {
     type             = "forward"

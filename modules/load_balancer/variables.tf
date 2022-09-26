@@ -10,10 +10,10 @@ variable "common_tags" {
   default     = {}
 }
 
-variable "lb_certificate_arn" {
-  type        = string
-  description = "ARN of TLS certificate imported into ACM for use with LB listener"
-}
+# variable "lb_certificate_arn" {
+#   type        = string
+#   description = "ARN of TLS certificate imported into ACM for use with LB listener"
+# }
 
 variable "lb_health_check_path" {
   type        = string
@@ -35,10 +35,10 @@ variable "resource_name_prefix" {
   description = "Resource name prefix used for tagging and naming AWS resources"
 }
 
-variable "ssl_policy" {
-  type        = string
-  description = "SSL policy to use on LB listener"
-}
+# variable "ssl_policy" {
+#   type        = string
+#   description = "SSL policy to use on LB listener"
+# }
 
 variable "vault_sg_id" {
   type        = string
