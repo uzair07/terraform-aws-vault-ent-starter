@@ -39,8 +39,8 @@ storage "raft" {
   }
 }
 
-cluster_addr = "https://$local_ipv4:8201"
-api_addr = "https://$local_ipv4:8200"
+cluster_addr = "http://$local_ipv4:8201"
+api_addr = "http://$local_ipv4:8200"
 
 listener "tcp" {
   address            = "0.0.0.0:8200"
@@ -66,5 +66,5 @@ systemctl start vault
 
 echo "Setup Vault profile"
 cat <<PROFILE | sudo tee /etc/profile.d/vault.sh
-export VAULT_ADDR="https://127.0.0.1:8200"
+export VAULT_ADDR="http://127.0.0.1:8200"
 PROFILE
