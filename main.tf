@@ -30,7 +30,7 @@ module "loadbalancer" {
   lb_subnets            = module.networking.vault_subnet_ids
   lb_type               = var.lb_type
   resource_name_prefix  = var.resource_name_prefix
-  ssl_policy            = var.ssl_policy
+  # ssl_policy            = var.ssl_policy
   vault_sg_id           = module.vm.vault_sg_id
   vpc_id                = module.networking.vpc_id
 }
