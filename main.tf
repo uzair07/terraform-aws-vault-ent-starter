@@ -7,7 +7,7 @@ module "iam" {
   aws_region                   = data.aws_region.current.name
   kms_key_arn                  = module.kms.kms_key_arn
   resource_name_prefix         = var.resource_name_prefix
-  secrets_manager_arn          = var.secrets_manager_arn
+  # secrets_manager_arn          = var.secrets_manager_arn
   user_supplied_iam_role_name  = var.user_supplied_iam_role_name
 }
 
