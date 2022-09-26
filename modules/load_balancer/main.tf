@@ -34,7 +34,7 @@ resource "aws_security_group_rule" "vault_lb_outbound" {
 
 locals {
   lb_security_groups = var.lb_type == "network" ? null : [aws_security_group.vault_lb[0].id]
-  lb_protocol        = var.lb_type == "network" ? "TCP" : "HTTPS"
+  lb_protocol        = var.lb_type == "network" ? "TCP" : "HTTP"
 }
 
 resource "aws_lb" "vault_lb" {
@@ -61,7 +61,7 @@ resource "aws_lb_target_group" "vault" {
   health_check {
     healthy_threshold   = 3
     unhealthy_threshold = 3
-    protocol            = "HTTPS"
+    protocol            = "HTTP"
     port                = "traffic-port"
     path                = var.lb_health_check_path
     interval            = 30

@@ -21,17 +21,17 @@ rm -rf /opt/vault/tls/*
 chmod 0755 /opt/vault/tls
 
 # vault-key.pem should be readable by the vault group only
-touch /opt/vault/tls/vault-key.pem
-chown root:vault /opt/vault/tls/vault-key.pem
-chmod 0640 /opt/vault/tls/vault-key.pem
+# touch /opt/vault/tls/vault-key.pem
+# chown root:vault /opt/vault/tls/vault-key.pem
+# chmod 0640 /opt/vault/tls/vault-key.pem
 
-secret_result=$(aws secretsmanager get-secret-value --secret-id ${secrets_manager_arn} --region ${region} --output text --query SecretString)
+# secret_result=$(aws secretsmanager get-secret-value --secret-id ${secrets_manager_arn} --region ${region} --output text --query SecretString)
 
-jq -r .vault_cert <<< "$secret_result" | base64 -d > /opt/vault/tls/vault-cert.pem
+# jq -r .vault_cert <<< "$secret_result" | base64 -d > /opt/vault/tls/vault-cert.pem
 
-jq -r .vault_ca <<< "$secret_result" | base64 -d > /opt/vault/tls/vault-ca.pem
+# jq -r .vault_ca <<< "$secret_result" | base64 -d > /opt/vault/tls/vault-ca.pem
 
-jq -r .vault_pk <<< "$secret_result" | base64 -d > /opt/vault/tls/vault-key.pem
+# jq -r .vault_pk <<< "$secret_result" | base64 -d > /opt/vault/tls/vault-key.pem
 
 aws s3 cp "s3://${s3_bucket_vault_license}/${vault_license_name}" /opt/vault/vault.hclic
 # vault.hclic should be readable by the vault group only
@@ -48,11 +48,11 @@ storage "raft" {
   node_id = "$instance_id"
   retry_join {
     auto_join = "provider=aws region=${region} tag_key=${name}-vault tag_value=server"
-    auto_join_scheme = "https"
-    leader_tls_servername = "${leader_tls_servername}"
-    leader_ca_cert_file = "/opt/vault/tls/vault-ca.pem"
-    leader_client_cert_file = "/opt/vault/tls/vault-cert.pem"
-    leader_client_key_file = "/opt/vault/tls/vault-key.pem"
+    auto_join_scheme = "http"
+    # leader_tls_servername = "${leader_tls_servername}"
+    # leader_ca_cert_file = "/opt/vault/tls/vault-ca.pem"
+    # leader_client_cert_file = "/opt/vault/tls/vault-cert.pem"
+    # leader_client_key_file = "/opt/vault/tls/vault-key.pem"
   }
 }
 
@@ -61,10 +61,10 @@ api_addr = "https://$local_ipv4:8200"
 
 listener "tcp" {
   address            = "0.0.0.0:8200"
-  tls_disable        = false
-  tls_cert_file      = "/opt/vault/tls/vault-cert.pem"
-  tls_key_file       = "/opt/vault/tls/vault-key.pem"
-  tls_client_ca_file = "/opt/vault/tls/vault-ca.pem"
+  tls_disable        = true
+  # tls_cert_file      = "/opt/vault/tls/vault-cert.pem"
+  # tls_key_file       = "/opt/vault/tls/vault-key.pem"
+  # tls_client_ca_file = "/opt/vault/tls/vault-ca.pem"
 }
 
 seal "awskms" {
@@ -87,5 +87,5 @@ systemctl start vault
 echo "Setup Vault profile"
 cat <<PROFILE | sudo tee /etc/profile.d/vault.sh
 export VAULT_ADDR="https://127.0.0.1:8200"
-export VAULT_CACERT="/opt/vault/tls/vault-ca.pem"
+# export VAULT_CACERT="/opt/vault/tls/vault-ca.pem"
 PROFILE

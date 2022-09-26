@@ -58,9 +58,9 @@ module "user_data" {
   aws_bucket_vault_license    = module.object_storage.s3_bucket_vault_license
   aws_region                  = data.aws_region.current.name
   kms_key_arn                 = module.kms.kms_key_arn
-  leader_tls_servername       = var.leader_tls_servername
+  # leader_tls_servername       = var.leader_tls_servername
   resource_name_prefix        = var.resource_name_prefix
-  secrets_manager_arn         = var.secrets_manager_arn
+  # secrets_manager_arn         = var.secrets_manager_arn
   user_supplied_userdata_path = var.user_supplied_userdata_path
   vault_license_name          = module.object_storage.vault_license_name
   vault_version               = var.vault_version
